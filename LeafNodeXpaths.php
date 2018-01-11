@@ -1,16 +1,16 @@
 <?php
 
-    $file =  simplexml_load_file($argv[1]);
+    $tree =  simplexml_load_file($argv[1]);
     
-    childMinder($file);
+    recurseChildren($tree);
 
-    function childMinder($thingToCheck, $string1 = '') {
-        $string1 .= '/' . $thingToCheck->getName();
-        foreach ($thingToCheck->children() as $child) {
-            childMinder($child, $string1);
+    function recurseChildren($node, $pathString = '') {
+        $pathString .= '/' . $node->getName();
+        foreach ($node->children() as $child) {
+            recurseChildren($child, $pathString);
         }
        
-        if ($thingToCheck->count() === 0) {
-            echo $string1 . "\n";
+        if ($node->count() === 0) {
+            echo $pathString . "\n";
         }
     }
