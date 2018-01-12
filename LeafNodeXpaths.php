@@ -1,11 +1,12 @@
 <?php
-    if (is_file($argv[1]) && is_readable($argv[1])) {
-        $tree =  simplexml_load_file($argv[1]);
-        recurseChildren($tree);
-    }
-    else {
+
+    if (!is_file($argv[1]) || !is_readable($argv[1])) {
         echo 'Cannot access this file, it might not be a file!' . "\n";
+        exit 1;
     }
+
+    $tree =  simplexml_load_file($argv[1]);
+    recurseChildren($tree);
 
     function recurseChildren($node, $pathString = '') {
         $pathString .= '/' . $node->getName();
