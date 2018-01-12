@@ -17,7 +17,13 @@
     
     if (count($xmlErrors) > 0) {
         foreach ($xmlErrors as $xmlError){
-            echo $errorArray[$xmlError->level] . ' in file ' . $xmlError->file . ' at Line: ' . $xmlError->line . ':' . $xmlError->column . ' ' . $xmlError->message . "\n";
+            printf('%s in file %s at Line %d:%d %s',
+                $errorArray[$xmlError->level],
+                $xmlError->file,
+                $xmlError->line,
+                $xmlError->column,
+                $xmlError->message
+            );
         }
         exit(1);
     }
